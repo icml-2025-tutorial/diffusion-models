@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liyue Shen – ICML 2025</title>
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+  <style>
+    :root {
+      --mint: #20cfc7;
+      --dark: #1f1f1f;
+    }
+    body {
+      font-family: 'Google Sans', 'Noto Sans', 'Castoro', sans-serif;
+      margin: 0;
+      display: flex;
+      color: #333;
+      line-height: 1.9;
+      font-size: var(--font-md);
+    }
+
+   .sidebar {
+      background: var(--dark);
+      color: white;
+      width: 250px;
+      height: 100vh;
+      padding: 30px 20px;
+      position: fixed;
+      transition: width 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .sidebar.collapsed {
+      width: 60px;
+      align-items: center;
+    }
+    
+    .sidebar img.logo {
+      width: 60px;
+      margin-bottom: 20px;
+    }
+    
+    .sidebar.collapsed img.logo {
+      display: none;
+    }
+    
+    .sidebar .toggle-btn {
+      display: none;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    
+    .sidebar.collapsed .toggle-btn {
+      display: block;
+    }
+    
+    .sidebar nav {
+      width: 100%;
+    }
+    
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: white;
+      text-decoration: none;
+      margin: 12px 0;
+      padding: 10px;
+      border-radius: 30px;
+      transition: background 0.3s;
+      white-space: nowrap;
+      gap: 10px;
+    }
+    
+    .sidebar.collapsed nav a {
+      justify-content: center;
+      padding: 12px 0;
+    }
+    
+    .sidebar nav a span {
+      display: inline;
+    }
+    
+    .sidebar.collapsed nav a span {
+      display: none;
+    }
+    
+    .sidebar nav a:hover {
+      background: var(--mint);
+      width: 100%;
+      text-align: center;
+    }
+    
+    .sidebar hr {
+      border: 0;
+      height: 1px;
+      background: #444;
+      margin: 20px 0;
+      width: 100%;
+      align-self: flex-start;
+    }
+    
+    .sidebar.collapsed hr {
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .main {
+      margin-left: 250px;
+      padding: 60px;
+      width: calc(100% - 250px);
+      max-width: 100%;
+    }
+    .sidebar.collapsed + .main {
+      margin-left: 60px;
+      width: calc(100% - 60px);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    img.profile {
+      width: 300px;
+      float: right;
+      margin-left: 20px;
+      border-radius: 8px;
+    }
+    .figure-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0;
+    }
+    
+    .figure-block {
+      max-width: 25%;
+      flex: 1 1 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .figure-block img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    @media (max-width: 480px) {
+      .figure-block {
+        max-width: 35%;
+      }
+    }
+
+    .papers {
+      margin-top: 40px;
+    }
+    .papers h3 {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+    .papers li {
+      margin-bottom: 10px;
+    }
+    .collapsed img.logo-toggle {
+      display: block;
+    }
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    
+    .section {
+      margin-top: 100px;
+    }
+
+    strong {
+      font-weight: 900;
+      color: #000;
+      font-size: 1.1em;
+    }
+
+  </style>
+</head>
+<body>
+<div class="sidebar" id="sidebar">
+  <img src="https://icml.cc/static/core/img/icml-navbar-logo.svg" class="logo" onclick="toggleSidebar()" alt="ICML Logo">
+  <nav>
+    <a href="index.html">
+      <img src="images/home.png" alt="Home" class="nav-icon"> <span>Home</span></a>
+    <a href="index.html#schedule">
+      <img src="images/schedule.png" alt="Schedule" class="nav-icon"> <span>Schedule</span>
+    </a>
+    <a href="index.html#speakers">
+      <img src="images/speakers.png" alt="Speakers" class="nav-icon"> <span>Speakers</span>
+    </a>
+    <hr>
+    <a href="qingqu.html">
+      <img src="images/presenters.png" alt="Generalization" class="nav-icon"> <span>Generalization</span>
+    </a>
+    <a href="yuxinchen.html">
+      <img src="images/presenters.png" alt="Sampling Theory" class="nav-icon"> <span>Sampling Theory</span>
+    </a>
+    <a href="liyueshen.html">
+      <img src="images/presenters.png" alt="Applications" class="nav-icon"> <span>Applications</span>
+    </a>
+  </nav>
+</div>
+
+<main class="main">
+  <section class="section">
+  <h2>Applications (Liyue Shen)</h2>
+  <img class="profile" src="https://liyueshen.engin.umich.edu/wp-content/uploads/sites/74/2023/09/liyueshen03_crop.jpg" alt="Liyue Shen">
+  <p><strong>Liyue Shen (liyues@umich.edu)</strong> is an assistant professor in the EECS department at the University of Michigan. Prior to that, she received her B.E. degree in Electronic Engineering from Tsinghua University in 2016, and obtained her Ph.D. degree from the Department of Electrical Engineering, Stanford University in 2022. She also spent one year as a postdoctoral research fellow at the Department of Biomedical Informatics, Harvard Medical School. Her research interest is in Biomedical AI, which lies in the interdisciplinary areas of machine learning, computer vision, signal and image processing, biomedical imaging, medical image analysis, and data science. She recently focuses on the generative diffusion models, implicit neural representation learning and multimodal foundation models. She is the recipient of the Stanford Bio-X Bowes Graduate Student Fellowship (2019-2022), and was selected as the Rising Star in EECS by MIT and the Rising Star in Data Science by the University of Chicago in 2021. She serves as area chairs for ICLR, MLHC, and helps organize multiple conferences and workshops including CPAL, ISBI, WiML, ML4H.</p>
+
+  <p><strong>Dr. Shen’s Related Work and Experience:</strong></p>
+  <p> PI Shen authored several papers on the earliest papers on diffusion model-based methods through conditional sampling by leveraging (latent) generative diffusion models for solving general inverse problems with reliable data consistency [1, 8]. These approaches have achieved impressive performance for medical image reconstruction, especially with large-scale high-resolution and high-dimensional data [3], by improving the computational and time efficiency [2,4] with robust generalization [5]. Recent works also explore the novel controllability of diffusion sampling via noise space [6,7]. The proposed approach offers promise for a spectrum of scientific applications including medical imaging and remote sensing [9, 10]. She has rich experience in delivering tutorials and organizing symposiums and workshops, including MICCAI, CPAL, ML4H, WiML. Moreover, together with Dr. Qu, she has co-taught a K-12 summer camp “AI Magic” on generative AI.</p>
+
+  <div class="figure-row">
+    <div class="figure-block">
+      <img src="images/liyue.png" alt="Resample Flowchart">
+      <p><strong>Figure 1:</strong> Overview of our <em>ReSample</em> algorithm during the reverse sampling process conditioned on the data constraints from measurement. The entire sampling process is conducted in the latent space upon passing the sample through the encoder. The proposed algorithm performs hard data consistency at some time steps *t* via a skipped-step mechanism [1].</p>
+    </div>
+    <div class="figure-block">
+      <img src="images/liyue2.png" alt="Demonstration">
+      <p><strong>Figure 2:</strong> Results of 3D CT reconstruction with 8 views on AAPM dataset, coronal view [3].</p>
+    </div>
+  </div>
+
+  <h2>Papers</h2>
+  <p><strong>Efficiency:</strong></p>
+  <ol>
+    <li>
+      Bowen Song*, Soo Min Kwon*, Zecheng Zhang, Xinyu Hu, Qing Qu, Liyue Shen.
+      <a href="https://openreview.net/forum?id=j8hdRqOUhN">Solving Inverse Problems with Latent Diffusion Models via Hard Data Consistency</a>.
+      International Conference on Learning Representations (ICLR’24), 2024. <em>(spotlight, top 5%)</em><br>
+      <a href="https://arxiv.org/abs/2307.08123">Preprint</a> – <a href="https://arxiv.org/pdf/2307.08123.pdf">PDF</a> – <a href="https://qingqu.engin.umich.edu/bibtex-song2023solving/">BibTeX</a>
+    </li>
+    <li>
+      Jiankun Zhao*, Bowen Song*, Liyue Shen.
+      <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06425.pdf">CoSIGN: Few-Step Guidance of ConSIstency Model to Solve General INverse Problems</a>.
+      European Conference on Computer Vision (ECCV), 2024.<br>
+      <a href="https://github.com/BioMed-AI-Lab-U-Michgan/cosign">Code</a>
+    </li>
+    <li>
+      Bowen Song*, Jason Hu*, Zhaoxu Luo, Jeffrey A. Fessler, Liyue Shen.
+      <a href="https://openreview.net/forum?id=h3Kv6sdTWO">DiffusionBlend: Learning 3D Image Prior through Position-aware Diffusion Score Blending for 3D Computed Tomography Reconstruction</a>.
+      Neural Information Processing Systems (NeurIPS), 2024.<br>
+      <a href="https://github.com/efzero/DiffusionBlend?tab=readme-ov-file">Code</a>
+    </li>
+    <li>
+      Jason Hu, Bowen Song, Xiaojian Xu, Liyue Shen, Jeffrey A. Fessler.
+      <a href="https://openreview.net/forum?id=HGnxhHz6ss">Learning Image Priors through Patch-based Diffusion Models for Solving Inverse Problems</a>.
+      Neural Information Processing Systems (NeurIPS), 2024.<br>
+      <a href="https://github.com/sundeco/PaDIS/tree/main?tab=readme-ov-file">Code</a>
+    </li>
+  </ol>
+
+  <p><strong>Generalization:</strong></p>
+  <ol start="5">
+    <li>
+      Jason Hu, Bowen Song, Jeffrey A. Fessler, Liyue Shen.
+      <a href="https://arxiv.org/abs/2410.11730">Test-Time Adaptation Improves Inverse Problem Solving with Patch-Based Diffusion Models</a>.
+      IEEE Transactions on Computational Imaging (TCI), 2025.<br>
+    </li>
+  </ol>
+
+  <p><strong>Controllability:</strong></p>
+  <ol start="6">
+    <li>
+      Bowen Song, Zecheng Zhang, Zhaoxu Luo, Jason Hu, Wei Yuan, Jing Jia, Zhengxu Tang, Guanyang Wang*, Liyue Shen*.
+      <a href="https://arxiv.org/abs/2502.04670">CCS: Controllable and Constrained Sampling with Diffusion Models via Initial Noise Perturbation</a>.
+      arXiv preprint, 2025.
+    </li>
+    <li>
+      Jing Jia, Sifan Liu, Bowen Song, Wei Yuan, Liyue Shen, Guanyang Wang.
+      <a href="https://arxiv.org/abs/2506.06185">Antithetic Noise in Diffusion Models</a>.
+      arXiv preprint, 2025.
+    </li>
+  </ol>
+
+  <p><strong>Domain-specific Applications:</strong></p>
+  <ol start="8">
+    <li>
+      Yang Song*, Liyue Shen*, Lei Xing, Stefano Ermon.
+      <a href="https://openreview.net/forum?id=vaRCHVj0uGI">Solving Inverse Problems in Medical Imaging with Score-Based Generative Models</a>.
+      International Conference on Learning Representations (ICLR), 2022.<br>
+      <a href="https://github.com/yang-song/score_inverse_problems">Code</a>
+    </li>
+    <li>
+      Zongyu Li*, Jason Hu*, Xiaojian Xu, Liyue Shen, Jeffrey A. Fessler.
+      <a href="https://ieeexplore.ieee.org/abstract/document/10695090">Accelerated Wirtinger Flow with Score-based Image Priors for Holographic Phase Retrieval in Poisson-Gaussian Noise Conditions</a>.
+      IEEE Transactions on Computational Imaging (TCI), 2024.
+    </li>
+    <li>
+      Zhaoxu Luo*, Bowen Song*, Liyue Shen.
+      <a href="https://arxiv.org/abs/2406.10225">SatDiffMoE: A Mixture of Estimation Method for Satellite Image Super-resolution with Latent Diffusion Models</a>.
+      International Conference on Machine Learning (ICML), Workshop on Structured Probabilistic Inference & Generative Modeling, 2024.
+    </li>
+  </ol>
+</main>
+
+<script>
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('collapsed');
+  document.querySelector('.main').classList.toggle('collapsed');
+}
+
+  window.addEventListener('load', () => {
+    const img1 = document.getElementById('img1');
+    const img2 = document.getElementById('img2');
+
+    if (img1 && img2) {
+      const height1 = img1.clientHeight;
+      const height2 = img2.clientHeight;
+
+      // If img2 is shorter, scale it up proportionally
+      if (height2 < height1) {
+        const scaleFactor = height1 / height2;
+        img2.style.transform = `scale(${scaleFactor})`;
+        img2.style.transformOrigin = 'top left';
+      }
+    }
+  });  
+</script>
+</body>
+</html>

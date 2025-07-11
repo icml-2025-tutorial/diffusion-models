@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Qing Qu – ICML 2025</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+  
+  <style>
+    :root {
+      --mint: #20cfc7;
+      --dark: #1f1f1f;
+    }
+    body {
+      font-family: 'Google Sans', 'Noto Sans', 'Castoro', sans-serif;
+      margin: 0;
+      display: flex;
+      color: #333;
+      line-height: 1.9;
+      font-size: var(--font-md);
+    }
+    .sidebar {
+      background: var(--dark);
+      color: white;
+      width: 250px;
+      height: 100vh;
+      padding: 30px 20px;
+      position: fixed;
+      transition: width 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .sidebar.collapsed {
+      width: 60px;
+      align-items: center;
+    }
+    
+    .sidebar img.logo {
+      width: 60px;
+      margin-bottom: 20px;
+    }
+    
+    .sidebar.collapsed img.logo {
+      display: none;
+    }
+    
+    .sidebar .toggle-btn {
+      display: none;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    
+    .sidebar.collapsed .toggle-btn {
+      display: block;
+    }
+    
+    .sidebar nav {
+      width: 100%;
+    }
+    
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: white;
+      text-decoration: none;
+      margin: 12px 0;
+      padding: 10px;
+      border-radius: 30px;
+      transition: background 0.3s;
+      white-space: nowrap;
+      gap: 10px;
+    }
+    
+    .sidebar.collapsed nav a {
+      justify-content: center;
+      padding: 12px 0;
+    }
+    
+    .sidebar nav a span {
+      display: inline;
+    }
+    
+    .sidebar.collapsed nav a span {
+      display: none;
+    }
+    
+    .sidebar nav a:hover {
+      background: var(--mint);
+      width: 100%;
+      text-align: center;
+    }
+    
+    .sidebar hr {
+      border: 0;
+      height: 1px;
+      background: #444;
+      margin: 20px 0;
+      width: 100%;
+      align-self: flex-start;
+    }
+    
+    .sidebar.collapsed hr {
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .main {
+      margin-left: 250px;
+      padding: 60px;
+      width: calc(100% - 250px);
+      max-width: 100%;
+    }
+    .sidebar.collapsed + .main {
+      margin-left: 60px;
+      width: calc(100% - 60px);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    img.profile {
+      width: 300px;
+      float: right;
+      margin-left: 20px;
+      border-radius: 8px;
+    }
+    .figure {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
+    .figure img {
+      width: 100%;
+      max-width: 25%;
+      height: auto;
+      object-fit: contain;
+      padding: 0 10px;
+    }
+    /* For smaller screens like phones */
+    @media (max-width: 480px) {
+      .figure img {
+        max-width: 35%;
+      }
+    }
+    .papers {
+      margin-top: 40px;
+    }
+    .papers h3 {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+    .papers li {
+      margin-bottom: 10px;
+    }
+    .collapsed img.logo-toggle {
+      display: block;
+    }
+
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    .section {
+      margin-top: 100px;
+    }
+
+    strong {
+      font-weight: 900;
+      color: #000;
+      font-size: 1.1em;
+    }
+
+  </style>
+</head>
+<body>
+<div class="sidebar" id="sidebar">
+  <img src="https://icml.cc/static/core/img/icml-navbar-logo.svg" class="logo" onclick="toggleSidebar()" alt="ICML Logo">
+  <nav>
+    <a href="index.html">
+      <img src="images/home.png" alt="Home" class="nav-icon"> <span>Home</span>
+    </a>
+    <a href="index.html#schedule">
+      <img src="images/schedule.png" alt="Schedule" class="nav-icon"> <span>Schedule</span>
+    </a>
+    <a href="index.html#speakers">
+      <img src="images/speakers.png" alt="Speakers" class="nav-icon"> <span>Speakers</span>
+    </a>
+    <hr>
+    <a href="qingqu.html">
+      <img src="images/presenters.png" alt="Generalization" class="nav-icon"> <span>Generalization</span>
+    </a>
+    <a href="yuxinchen.html">
+      <img src="images/presenters.png" alt="Sampling Theory" class="nav-icon"> <span>Sampling Theory</span>
+    </a>
+    <a href="liyueshen.html">
+      <img src="images/presenters.png" alt="Applications" class="nav-icon"> <span>Applications</span>
+    </a>
+  </nav>
+</div>
+
+<main class="main">
+  <section class="section">
+  <h2>Generalization (Qing Qu)</h2>
+  <img class="profile" src="https://qingqu.engin.umich.edu/wp-content/uploads/sites/42/2021/08/AE0E7C9E-9D72-4FDB-9C6B-1D3E19DCCE72_1_105_c.jpeg" alt="Qing Qu">
+  <p><strong>Qing Qu (qingqu@umich.edu)</strong> is an assistant professor in the EECS department at the University of Michigan. Before that, he was a Moore-Sloan data science fellow at the Center for Data Science, New York University, from 2018 to 2020. He received his Ph.D from Columbia University in Electrical Engineering in Oct. 2018. He received his B.Eng. from Tsinghua University in Jul. 2011, and a M.Sc. from Johns Hopkins University in Dec. 2012, both in Electrical and Computer Engineering. His research interest lies at the intersection of the foundation of data science, machine learning, numerical optimization, and signal/image processing. His current research interests focus on deep representation learning and diffusion models. He is the recipient of the Best Student Paper Award at SPARS’15, the recipient of the Microsoft PhD Fellowship in machine learning in 2016. He received the NSF Career Award in 2022, and Amazon Research Award (AWS AI) in 2023, a UM CHS Junior Faculty Award in 2025, and a Google Research Scholar Award in 2025. He was the program chair of the new Conference on Parsimony & Learning (CPAL’24), area chair of NeurIPS, ICML, and ICLR, and action editor of TMLR.</p>
+
+  <p><strong>Dr. Qu’s Related Work and Experience:</strong></p>
+  <p>Dr. Qu’s seminal work [2] for the topic has won the Best Paper Award in the NeurIPS Diffusion Model Workshop in 2023. He has recently published a line of pioneering work on understanding the generalizability of generative AI models [1-5], and controlling diffusion models [6,7,9,10]. He has rich experience in delivering tutorials, with several previous tutorials given at ICASSP, CVPR, and CPAL. Moreover, together with Dr. Shen, he has developed a K-12 summer camp “AI Magic” on generative AI. </p>
+
+  <div class="figure">
+    <img src="images/qingqu_reproducibility_v5.png" alt="Reproducibility">
+    <img src="images/qingqu_generaliztion_v5.png" alt="Generalizability">
+  </div>
+  <p><strong>Figure 1:</strong> Co-emergence of reproducibility and generalizability of UNet architectures with three different parameter numbers (UNet-64, UNet-128, and UNet-256) in the denoising diffusion probabilistic model, which is trained on a varying number of images from the CIFAR-10 dataset. Figure courtesy of [2].</p>
+
+  <section class="section">
+    <h2>Papers</h2>
+    <p><strong>Overview Paper:</strong></p>
+  <ol>
+    <li>
+      Huijie Zhang, Peng Wang, Siyi Chen, Zekai Zhang, Qing Qu. 
+      <a href="https://scholar.google.com/citations?view_op=view_citation&hl=zh-CN&user=JfblW3MAAAAJ&sortby=pubdate&citation_for_view=JfblW3MAAAAJ:XD-gHx7UXLsC">Generalization of Diffusion Models: Principles, Theory, and Implications</a>.
+      <em>SIAM News</em>, April 2025.<br>
+    </li>
+  </ol>
+
+  <p><strong>The Phenomenon of Generalization:</strong></p>
+  <ol start="2">
+    <li>
+      Huijie Zhang*, Jinfan Zhou*, Yifu Lu, Minzhe Guo, Liyue Shen, Qing Qu.
+      <a href="https://arxiv.org/abs/2310.05264">The Emergence of Reproducibility and Consistency in Diffusion Models</a>.
+      International Conference on Machine Learning (ICML’24), 2024.<br>
+      <a href="https://arxiv.org/abs/2310.05264">Preprint</a> – <a href="https://arxiv.org/pdf/2310.05264.pdf">PDF</a> – <a href="https://qingqu.engin.umich.edu/bibtex-zhang2023emergence/">BibTeX</a> – <a href="https://qingqu.engin.umich.edu/wp-content/uploads/sites/42/2023/10/The_Emergence_of_Reproducibility_and_Consistency_in_Diffusion_Models_slides.pdf">Slides</a>
+    </li>
+    <li>
+      Huijie Zhang, Zijian Huang, Siyi Chen, Jinfan Zhou, Zekai Zhang, Peng Wang, Qing Qu.
+      <a href="https://arxiv.org/abs/2505.20123">Understanding Generalization in Diffusion Models via Probability Flow Distance</a>.
+      Arxiv Preprint arXiv:2505.20123, 2025.<br>
+      <a href="https://arxiv.org/abs/2505.20123">Preprint</a> – <a href="https://www.huijiezh.com/probability-flow-distance/index.html">Project Website</a>
+    </li>
+    <li>
+      Xiang Li, Yixiang Dai, Qing Qu.
+      <a href="https://arxiv.org/abs/2410.24060">Understanding Generalizability of Diffusion Models Requires Rethinking the Hidden Gaussian Structure</a>.
+      Neural Information Processing Systems (NeurIPS’24), 2024.<br>
+      <a href="https://arxiv.org/abs/2410.24060">Preprint</a> – <a href="https://arxiv.org/pdf/2410.24060">PDF</a> – <a href="https://qingqu.engin.umich.edu/bibtex-li2024understanding/">BibTeX</a>
+    </li>
+  </ol>
+
+  <p><strong>Theory on Generalization:</strong></p>
+  <ol start="5">
+    <li>
+      Peng Wang*, Huijie Zhang*, Zekai Zhang, Siyi Chen, Yi Ma, Qing Qu.
+      <a href="https://arxiv.org/abs/2409.02426">Diffusion Models Learn Low-Dimensional Distributions via Subspace Clustering</a>.
+      Arxiv Preprint arXiv:2409.02426, 2024.<br>
+      <a href="https://arxiv.org/abs/2409.02426">Preprint</a> – <a href="https://arxiv.org/pdf/2409.02426">PDF</a> – <a href="https://www.huijiezh.com/diffusion-model-subspace-clustering/index.html">Project Website</a>
+    </li>
+  </ol>
+
+  <p><strong>Implications</strong></p>
+  <ol start="6">
+    <li>
+      Siyi Chen*, Huijie Zhang*, Minzhe Guo, Yifu Lu, Peng Wang, Qing Qu.
+      <a href="https://arxiv.org/abs/2409.02374">Exploring Low-Dimensional Subspaces in Diffusion Models for Controllable Image Editing</a>.
+      Neural Information Processing Systems (NeurIPS’24), 2024.<br>
+      <a href="https://arxiv.org/abs/2409.02426">Preprint</a> – <a href="https://arxiv.org/pdf/2409.02374">PDF</a> – <a href="https://qingqu.engin.umich.edu/bibtex-chen2024exploring/">BibTeX</a> – <a href="https://github.com/ChicyChen/LOCO-Edit">Code</a> – <a href="https://chicychen.github.io/LOCO/index.html">Project Website</a>
+    </li>
+    <li>
+      Wenda Li*, Huijie Zhang*, Qing Qu.
+      <a href="https://arxiv.org/abs/2410.21088">Shallow Diffuse: Robust and Invisible Watermarking through Low-Dimensional Subspaces in Diffusion Models</a>.
+      Arxiv Preprint arXiv:2410.21088, 2024.<br>
+      <a href="https://arxiv.org/abs/2410.21088">Preprint</a> – <a href="https://arxiv.org/pdf/2410.21088">PDF</a> – <a href="https://qingqu.engin.umich.edu/bibtex-li2024shallow/">BibTeX</a> – <a href="https://github.com/liwd190019/Shallow-Diffuse">Code</a> – <a href="https://www.huijiezh.com/shallow-diffuse/">Project Website</a>
+    </li>
+    <li>
+      Xiao Li*, Zekai Zhang*, Xiang Li, Siyi Chen, Zhihui Zhu, Peng Wang, Qing Qu.
+      <a href="https://arxiv.org/abs/2502.05743">Understanding Representation Dynamics of Diffusion Models via Low-Dimensional Modeling</a>.
+      Arxiv Preprint arXiv:2502.05743, 2025.
+    </li>
+  </ol>
+    
+  <p><strong>Other Related Results:</strong></p>
+  <ol start="9">
+    <li>
+      Xiang Li, Rongrong Wang, Qing Qu.
+      <a href="http://arxiv.org/abs/2505.19210">Towards Understanding the Mechanisms of Classifier-Free Guidance</a>.
+      Arxiv Preprint arXiv:2505.19210, 2025.<br>
+      <a href="http://arxiv.org/abs/2505.19210">Preprint</a> – <a href="https://arxiv.org/pdf/2505.19210">PDF</a> – BibTeX
+    </li>
+    <li>
+      Siyi Chen, Yimeng Zhang, Sijia Liu, Qing Qu.
+      <a href="https://arxiv.org/abs/2504.21307">The Dual Power of Interpretable Token Embeddings: Jailbreaking Attacks and Defenses for Diffusion Model Unlearning</a>.
+      Arxiv Preprint arXiv:2504.21307, 2025<br>
+      <a href="https://arxiv.org/abs/2504.21307">Preprint</a> – <a href="https://arxiv.org/pdf/2504.21307">PDF</a> – BibTeX
+    </li>
+    <li>
+      Huijie Zhang*, Yifu Lu*, Ismail Alkhouri, Saiprasad Ravishankar, Dogyoon Song, Qing Qu. 
+      <a href="https://arxiv.org/abs/2312.09181">Improving Efficiency of Diffusion Models via Multi-Stage Framework and Tailored Multi-Decoder Architectures</a>.
+      Conference on Computer Vision and Pattern Recognition (CVPR’24), 2024.<br>
+      <a href="https://arxiv.org/abs/2312.09181">Preprint</a> – <a href="https://arxiv.org/pdf/2312.09181.pdf">PDF</a> – <a href="https://qingqu.engin.umich.edu/bibtex-zhang2023improving/">BibTex</a> – <a href="https://github.com/LucasYFL/Multistage_Diffusion">Code</a> – <a href="https://www.huijiezh.com/multistage-diffusion-model/">Project Website</a>
+    </ul>
+  </div>
+</main>
+
+<script>
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('collapsed');
+  document.querySelector('.main').classList.toggle('collapsed');
+}
+</script>
+</body>
+</html>

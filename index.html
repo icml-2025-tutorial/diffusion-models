@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta tags for SEO and social media previews --> 
+  <meta charset="utf-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+  <meta name="description" content="ICML 2025 Tutorial: Harnessing Low Dimensionality in Diffusion Models. Explore generalization, sampling efficiency, and scientific applications through a theory-driven lens." /> 
+  <meta name="keywords" content="ICML 2025, Diffusion Models, Low Dimensionality, Generative Models, Generalization, Sampling Efficiency, Scientific Applications" /> 
+  
+  <!-- Open Graph / Facebook --> 
+  <meta property="og:type" content="website" /> 
+  <meta property="og:title" content="ICML 2025 Tutorial: Harnessing Low Dimensionality in Diffusion Models" /> 
+  <meta property="og:description" content="Explore how low-dimensional structures in data and models enable generalization, efficient sampling, and scientific discovery in diffusion models." /> 
+  <meta property="og:url" content="https://icml2025-tutorial.github.io/" /> <meta property="og:image" content="images/index.png" /> 
+  <meta property="og:image:width" content="1200" /> <meta property="og:image:height" content="630" /> 
+  
+  <!-- Twitter --> 
+  <meta name="twitter:card" content="summary_large_image" /> 
+  <meta name="twitter:title" content="ICML 2025 Tutorial: Harnessing Low Dimensionality in Diffusion Models" /> 
+  <meta name="twitter:description" content="Explore how low-dimensional structures in data and models enable generalization, efficient sampling, and scientific discovery in diffusion models." /> 
+  <meta name="twitter:image" content="images/index.png" />
+
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harnessing Low Dimensionality - ICML 2025</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <style> :root { --mint: #20cfc7; --dark: #1f1f1f; --font-sm: clamp(12px, 1vw, 14px); --font-md: clamp(14px, 1.2vw, 18px); --font-lg: clamp(18px, 2vw, 28px); } * { box-sizing: border-box; scroll-behavior: smooth; } 
+    body {
+      font-family: 'Google Sans', 'Noto Sans', 'Castoro', sans-serif;
+      margin: 0;
+      display: flex;
+      color: #333;
+      line-height: 1.9;
+      font-size: var(--font-md);
+    }
+ img { max-width: 100%; height: auto; }
+    /* Sidebar styles */
+    .sidebar {
+      background: var(--dark);
+      color: white;
+      width: 250px;
+      height: 100vh;
+      padding: 30px 20px;
+      position: fixed;
+      transition: width 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .sidebar.collapsed {
+      width: 60px;
+      align-items: center;
+    }
+    .sidebar img.logo {
+      width: 60px;
+      margin-bottom: 20px;
+    }
+    .sidebar.collapsed img.logo {
+      display: none;
+    }
+    .sidebar .toggle-btn {
+      display: none;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .sidebar.collapsed .toggle-btn {
+      display: block;
+    }
+    .sidebar nav {
+      width: 100%;
+    }
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: white;
+      text-decoration: none;
+      margin: 12px 0;
+      padding: 10px;
+      border-radius: 30px;
+      transition: background 0.3s;
+      white-space: nowrap;
+      gap: 10px;
+      font-size: var(--font-md);
+    }
+    .sidebar.collapsed nav a {
+      justify-content: center;
+      padding: 12px 0;
+    }
+    .sidebar nav a span {
+      display: inline;
+    }
+    .sidebar.collapsed nav a span {
+      display: none;
+    }
+    .sidebar nav a:hover {
+      background: var(--mint);
+      width: 100%;
+      text-align: center;
+    }
+    .sidebar hr {
+      border: 0;
+      height: 1px;
+      background: #444;
+      margin: 20px 0;
+      width: 100%;
+      align-self: flex-start;
+    }
+    .sidebar.collapsed hr {
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Main content */
+    .main {
+      margin-left: 250px;
+      padding: 60px;
+      width: calc(100% - 250px);
+      max-width: 100%;
+    }
+    .sidebar.collapsed + .main {
+      margin-left: 60px;
+      width: calc(100% - 60px);
+    }
+    
+    /* Typography & layout */
+    .header h1 {
+      font-size: var(--font-lg);
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .header p {
+      margin: 4px 0;
+      text-align: center;
+      font-size: var(--font-md);
+    }
+    .header .btn-top {
+      display: inline-block;
+      margin-bottom: 20px;
+      background: var(--mint);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      text-align: center;
+      font-size: var(--font-md);
+    }
+    
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+      table-layout: auto;
+    }
+    
+    .schedule-table th,
+    .schedule-table td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      vertical-align: top;
+      text-align: left;
+      white-space: normal; /* allow wrapping by default */
+    }
+    
+    .schedule-table th {
+      background-color: #f8f8f8;
+      font-weight: bold;
+    }
+    
+    /* Prevent time, speaker, and slides from wrapping until truly needed */
+    .schedule-table td:nth-child(2),  /* Time */
+    .schedule-table td:nth-child(3),  /* Speaker */
+    .schedule-table td:nth-child(4) { /* Slides */
+      white-space: nowrap;
+      width: 1%; /* Let content define min width, topic adjusts */
+    }
+    
+    /* Let Topic column be flexible */
+    .schedule-table td:first-child,
+    .schedule-table th:first-child {
+      width: auto;
+    }
+    
+    /* Responsive tweak for small screens */
+    @media (max-width: 768px) {
+      .schedule-table {
+        font-size: 0.95rem;
+      }
+    
+      .schedule-table td:nth-child(2),
+      .schedule-table td:nth-child(3),
+      .schedule-table td:nth-child(4) {
+        white-space: normal; /* allow wrapping if really necessary */
+      }
+    }
+    
+    .speakers {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .speaker {
+      flex: 1 1 220px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+    .speaker img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 12px;
+    }
+    
+    .speaker-text a {
+      font-weight: 600;
+      text-decoration: underline;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .speaker-text {
+      line-height: 1.6;
+    }
+    .speaker-text .role {
+      font-weight: 300;
+      font-size: var(--font-sm);
+    }
+    
+    .section {
+      margin-top: 100px;
+    }
+
+    .figure {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
+    .figure img {
+      width: 100%;
+      max-width: 50%;
+      height: auto;
+      object-fit: contain;
+      padding: 0 10px;
+    }
+    /* For smaller screens like phones */
+    @media (max-width: 480px) {
+      .figure img {
+        max-width: 90%;
+      }
+    }
+
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    strong {
+      font-weight: 900;
+      color: #000;
+      font-size: 1.1em;
+    }
+    @media screen and (max-width: 768px) {
+    .main {
+      margin-left: 0;
+      width: 100%;
+      padding: 20px;
+    }
+    .sidebar {
+      display: none;
+    }
+    .toggle-btn {
+      display: block;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+    .sidebar.active {
+      display: flex;
+      z-index: 1000;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="sidebar" id="sidebar">
+  <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+  <div onclick="toggleSidebar()" style="cursor: pointer;">
+    <img src="https://icml.cc/static/core/img/icml-navbar-logo.svg" class="logo" alt="ICML Logo">
+  </div>
+  <nav>
+    <a href="index.html">
+      <img src="images/home.png" alt="Home" class="nav-icon"> <span>Home</span></a>
+    <a href="index.html#schedule">
+      <img src="images/schedule.png" alt="Schedule" class="nav-icon"> <span>Schedule</span>
+    </a>
+    <a href="index.html#speakers">
+      <img src="images/speakers.png" alt="Speakers" class="nav-icon"> <span>Speakers</span>
+    </a>
+    <hr>
+    <a href="qingqu.html">
+      <img src="images/presenters.png" alt="Generalization" class="nav-icon"> <span>Generalization</span>
+    </a>
+    <a href="yuxinchen.html">
+      <img src="images/presenters.png" alt="Sampling Theory" class="nav-icon"> <span>Sampling Theory</span>
+    </a>
+    <a href="liyueshen.html">
+      <img src="images/presenters.png" alt="Applications" class="nav-icon"> <span>Applications</span>
+    </a>
+  </nav>
+</div>
+
+<main class="main">
+  <div class="header">
+    <a class="btn-top" href="https://icml.cc/virtual/2025/tutorial/40008" target="_blank">ICML 2025 Tutorial</a>
+    <h1>Harnessing Low Dimensionality in Diffusion Models: From Theory to Practice</h1>
+    <p><strong>Yuxin Chen    Qing Qu    Liyue Shen</strong></p>
+    <p>Mon 14 Jul 2025 • 9:30 — 12:00 PDT<br>West Ballroom B</p>
+  </div>
+
+  <section id="abstract" class="section">
+    <h2>Abstract</h2>
+    <p>Diffusion models have emerged as a powerful class of deep generative models, achieving state-of-the-art performance in a wide range of data generation tasks. At a high level, they learn data distributions by progressively denoising Gaussian noise, mimicking non-equilibrium thermodynamic diffusion processes. Despite their empirical success, the theoretical foundations underlying their capabilities remain poorly understood. This lack of understanding limits their broader adoption—especially in high-stakes applications that demand interpretability, efficiency, and safety.</p>
+    <p>In response to growing concerns about the reliability and transparency of generative AI models, this tutorial—building on a <a href="https://cpal.cc/tutorial_info/">joint tutorial</a> by the organizers at CPAL'25 (Stanford)—offers a timely introduction to the theoretical principles governing diffusion models. We will focus on three core aspects: <strong>generalization</strong>, <strong>sampling efficiency</strong>, and <strong>scientific applications</strong>. Drawing on recent advances, the tutorial will highlight how <strong>low-dimensional structures</strong> in both data and models can be exploited to address key challenges in generalization, fast sampling convergence, and controllability.</p>
+    <p>Specifically, we will examine how diffusion models adaptively learn underlying data distributions, how to accelerate convergence during sampling, and how to characterize the intrinsic properties of the learned denoiser. These theoretical insights will then be connected to practical advances, demonstrating how to harness them for real-world scientific applications.</p>
+    <div class="figure">
+      <img src="images/index.png" alt="Abstract Diagram">
+    </div>
+    <p>Specifically, the tutorial will cover the following:</p>
+    <p><strong>(i) Generalization:</strong> We begin with an introduction to diffusion models, followed by a comprehensive study of their generalization: when and why they can learn low-dimensional target structures, how sample complexity scales with intrinsic data dimension, and how they transition from memorization to generalization. We also introduce a probability flow-based metric to quantify generalization and highlight several intriguing behaviors observed during training.</p>
+    <p><strong>(ii) Sampling Efficiency:</strong> We seek to develop a sharp, non-asymptotic convergence theory for mainstream diffusion-based samplers, leveraging these theoretical insights to design provably faster higher-order diffusion samplers, including SDE-based and ODE-based solvers. We will also investigate the capability of diffusion-based samplers to adapt to unknown low-dimensional data structures, exploiting adaptive parallel computing to provably speed up training and sampling.</p>
+    <p><strong>(iii) Scientific Applications:</strong> We will advance diffusion models for scientific imaging by improving their flexibility, efficiency, and robustness in solving inverse problems on high-dimensional, high-resolution data. Our focus includes efficient latent and patch-based methods, enhanced data consistency for challenging 3D tasks, and controllable sampling techniques that enforce desired constraints while maintaining sample quality.</p>
+  </section>
+
+  <section id="schedule" class="section">
+    <h2>Tutorial Schedule</h2>
+    
+    <div class="schedule-container">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Topic</th>
+            <th style="width: 180px;">Time (PDT)</th>
+            <th style="width: 120px;">Speaker</th>
+            <th style="width: 70px;">Slides</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Introduction</strong>
+              <ol class="plain-list">
+                <li>Tutorial overview</li>
+                <li>Basics of diffusion models</li>
+              </ol>
+            </td>
+            <td>09:30 – 09:40 a.m.</td>
+            <td rowspan="2">Qing Qu</td>
+            <td rowspan="2"><a href="#" target="_blank">PDF</a></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Part I: Generalization of Learning Diffusion Models</strong>
+              <ol class="plain-list">
+                <li>Reproducibility and Generalization</li>
+                <li>Theory and Phase transition of memorization and generalization</li>
+                <li>Quantifying generalization via probability flow distance</li>
+              </ol>
+            </td>
+            <td>09:40 – 10:25 a.m.</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Part II: Guaranteed and Efficient Sampling of Diffusion Models</strong>
+              <ol class="plain-list">
+                <li>Non-asymptotic convergence theory</li>
+                <li>Adaptation to low-dimensional structure</li>
+                <li>Acceleration via higher-order approximation</li>
+              </ol>
+            </td>
+            <td>10:25 – 11:10 a.m.</td>
+            <td>Yuxin Chen</td>
+            <td><a href="slides/part2.pdf" target="_blank">PDF</a></td>
+          </tr>
+          <tr>
+            <td><strong>Break</strong></td>
+            <td>11:10 – 11:15 a.m.</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Part III: From Theory to Scientific Applications</strong>
+              <ol class="plain-list">
+                <li>Efficient Methods for Solving Inverse Problems</li>
+                <li>Generalizability of Learned Image Priors</li>
+                <li>Controllable Generation</li>
+              </ol>
+            </td>
+            <td>11:15 – 12:00 p.m.</td>
+            <td>Liyue Shen</td>
+            <td><a href="https://docs.google.com/presentation/d/1VbSvARmRnbFl_oC1EU4dw3sh1f5q39aV3WiIWDh7PrY/edit?slide=id.g27fb30e840f_0_0#slide=id.g27fb30e840f_0_0" target="_blank">PDF</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  
+  <section id="speakers" class="section">
+    <h2>Speakers</h2>
+    <div class="speakers">
+      <div class="speaker">
+        <img src="images/yuxin_profile.png" alt="Yuxin Chen">
+        <div class="speaker-text">
+          <a href="https://yuxinchen2020.github.io/" target="_blank">Yuxin Chen</a>
+          <span class="role">University of Pennsylvania<br>Associate Professor</span>
+        </div>
+      </div>
+      <div class="speaker">
+        <img src="https://qingqu.engin.umich.edu/wp-content/uploads/sites/42/2021/08/AE0E7C9E-9D72-4FDB-9C6B-1D3E19DCCE72_1_105_c.jpeg" alt="Qing Qu">
+        <div class="speaker-text">
+          <a href="http://qingqu.engin.umich.edu/" target="_blank">Qing Qu</a>
+          <span class="role">University of Michigan<br>Assistant Professor</span>
+        </div>
+      </div>
+      <div class="speaker">
+        <img src="https://liyueshen.engin.umich.edu/wp-content/uploads/sites/74/2023/09/liyueshen03_crop.jpg" alt="Liyue Shen">
+        <div class="speaker-text">
+          <a href="https://liyueshen.engin.umich.edu/" target="_blank">Liyue Shen</a>
+          <span class="role">University of Michigan<br>Assistant Professor</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; display: flex; justify-content: center; gap: 40px; align-items: center;">
+      <img src="images/upenn_logo.png" alt="University of Pennsylvania" style="height: 60px;">
+      <img src="images/umich_logo.png" alt="University of Michigan" style="height: 60px;">
+    </div>    
+  </section>
+
+  <section id="related tutorials" class="section">
+    <h2>Related Tutorials</h2>
+    <p>While related tutorials have been offered at NeurIPS and CVPR in recent years (see below), these tutorials primarily focus on introducing the methods and their applications, rather than the theoretical foundations of these generative AI models. As such, our tutorial will be highly complimentary to the previous tutorials, and cover timely while important topics in generative AI models.</p>
+    
+    <ul>
+    <li>CVPR‘22: <a href="https://cvpr2022-tutorial-diffusion-models.github.io/">Denoising Diffusion-based Generative Modeling: Foundations and Applications</a></li>
+    <li>CVPR‘23: <a href="https://cvpr2023-tutorial-diffusion-models.github.io/">Denoising Diffusion Models: A Generative Learning Big Bang</a></li>
+    <li>NeurIPS’23: <a href="https://neurips2023-ldm-tutorial.github.io/">Latent Diffusion Models: Is the Generative AI Revolution Happening in Latent Space?</a></li>
+    <li>CVPR’24: <a href="https://cvpr.thecvf.com/virtual/2024/tutorial/23730">Diffusion-based Video Generative Models</a></li>
+    <li>NeurIPS’24: <a href="https://neurips.cc/virtual/2024/tutorial/99531">Flow Matching for Generative Modeling</a></li>
+    <li>ICML’25: <a href="https://icml.cc/virtual/2025/tutorial/40011">Flowing Through Continuous-Time Generative Models: A Clear and Systematic Tour</a></li>
+  </ul>
+  </section>
+</main>
+
+<script>
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('collapsed');
+  document.querySelector('.main').classList.toggle('collapsed');
+}
+</script>
+</body>
+</html>

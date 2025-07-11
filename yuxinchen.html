@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yuxin Chen – ICML 2025</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <style>
+    :root {
+      --mint: #20cfc7;
+      --dark: #1f1f1f;
+    }
+    body {
+      font-family: 'Google Sans', 'Noto Sans', 'Castoro', sans-serif;
+      margin: 0;
+      display: flex;
+      color: #333;
+      line-height: 1.9;
+      font-size: var(--font-md);
+    }
+
+    .sidebar {
+      background: var(--dark);
+      color: white;
+      width: 250px;
+      height: 100vh;
+      padding: 30px 20px;
+      position: fixed;
+      transition: width 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .sidebar.collapsed {
+      width: 60px;
+      align-items: center;
+    }
+    
+    .sidebar img.logo {
+      width: 60px;
+      margin-bottom: 20px;
+    }
+    
+    .sidebar.collapsed img.logo {
+      display: none;
+    }
+    
+    .sidebar .toggle-btn {
+      display: none;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    
+    .sidebar.collapsed .toggle-btn {
+      display: block;
+    }
+    
+    .sidebar nav {
+      width: 100%;
+    }
+    
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: white;
+      text-decoration: none;
+      margin: 12px 0;
+      padding: 10px;
+      border-radius: 30px;
+      transition: background 0.3s;
+      white-space: nowrap;
+      gap: 10px;
+    }
+    
+    .sidebar.collapsed nav a {
+      justify-content: center;
+      padding: 12px 0;
+    }
+    
+    .sidebar nav a span {
+      display: inline;
+    }
+    
+    .sidebar.collapsed nav a span {
+      display: none;
+    }
+    
+    .sidebar nav a:hover {
+      background: var(--mint);
+      width: 100%;
+      text-align: center;
+    }
+    
+    .sidebar hr {
+      border: 0;
+      height: 1px;
+      background: #444;
+      margin: 20px 0;
+      width: 100%;
+      align-self: flex-start;
+    }
+    
+    .sidebar.collapsed hr {
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .main {
+      margin-left: 250px;
+      padding: 60px;
+      width: calc(100% - 250px);
+      max-width: 100%;
+    }
+    .sidebar.collapsed + .main {
+      margin-left: 60px;
+      width: calc(100% - 60px);
+    }
+
+    .section {
+      margin-top: 100px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    img.profile {
+      width: 300px;
+      float: right;
+      margin-left: 20px;
+      border-radius: 8px;
+    }
+    .figure {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
+    
+    .figure img {
+      width: 100%;
+      max-width: 50%;
+      height: auto;
+      object-fit: contain;
+      padding: 0 10px;
+    }
+    
+    /* For smaller screens like phones */
+    @media (max-width: 480px) {
+      .figure img {
+        max-width: 90%;
+      }
+    }
+    .papers {
+      margin-top: 40px;
+    }
+    .papers h3 {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+    .papers li {
+      margin-bottom: 10px;
+    }
+    .collapsed img.logo-toggle {
+      display: block;
+    }
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    strong {
+      font-weight: 900;
+      color: #000;
+      font-size: 1.1em;
+    }
+
+
+  </style>
+</head>
+<body>
+<div class="sidebar" id="sidebar">
+  <img src="https://icml.cc/static/core/img/icml-navbar-logo.svg" class="logo" onclick="toggleSidebar()" alt="ICML Logo">
+  <nav>
+   <a href="index.html">
+      <img src="images/home.png" alt="Home" class="nav-icon"> <span>Home</span>
+    </a>
+    <a href="index.html#schedule">
+      <img src="images/schedule.png" alt="Schedule" class="nav-icon"> <span>Schedule</span>
+    </a>
+    <a href="index.html#speakers">
+      <img src="images/speakers.png" alt="Speakers" class="nav-icon"> <span>Speakers</span>
+    </a>
+    <hr>
+    <a href="qingqu.html">
+      <img src="images/presenters.png" alt="Generalization" class="nav-icon"> <span>Generalization</span>
+    </a>
+    <a href="yuxinchen.html">
+      <img src="images/presenters.png" alt="Sampling Theory" class="nav-icon"> <span>Sampling Theory</span>
+    </a>
+    <a href="liyueshen.html">
+      <img src="images/presenters.png" alt="Applications" class="nav-icon"> <span>Applications</span>
+    </a>
+  </nav>
+</div>
+
+<main class="main">
+  <section class="section">
+  <h2>Sampling Theory (Yuxin Chen)</h2>
+  <img class="profile" src="images/yuxin_profile.png" alt="Yuxin Chen">
+  <p><strong>Yuxin Chen (yuxinc@wharton.upenn.edu)</strong> is an associate professor of statistics and of electrical and systems engineering at the University of Pennsylvania (UPenn). Before joining UPenn, he was an assistant professor of electrical and computer engineering at Princeton. He completed his Ph.D. in Electrical Engineering at Stanford University, and was also a postdoc scholar at Stanford Statistics. Dr. Chen’s expertise includes diffusion models, reinforcement learning theory, high-dimensional statistics, optimization, statistical learning theory, and information theory. His research accomplishments have been recognized by the Alfred P. Sloan Fellowship, the SIAM Imaging Science Best Paper Prize, the ICCM Best Paper Award (Gold Medal), the IEEE Transactions on Power Electronics Prize Paper Award (first place), and he was selected as a finalist for the Best Paper Prize for Young Researchers in Continuous Optimization. In addition, he has also received the Google Research Scholar Award and the Amazon Research Award. He has won six teaching awards and a Princeton Graduate Mentoring Award.</p>
+
+  <p><strong>Dr. Chen’s Related Work and Experience:</strong></p>
+  <p> Dr. Chen’s recent work [1] develops the state-of-the-art convergence theory for diffusion models. For instance, his work [5] provides the
+first sharp convergence guarantees for the probability flow ODE sampler, while his work [1] is the first work that unveils the DDIM sampler’s ability to adapt to unknown low-dimensional structure of the target data distribution. Dr. Chen has presented a number of tutorials in conferences and workshops like SIGMETRICS, Joint Statistical Meetings, and ISIT.</p>
+
+  <section class="section">
+    <h2>Papers</h2>
+    <ol>
+    <li>
+      Jiadong Liang, Zhihan Huang, Yuxin Chen, 
+      <em>“Low-Dimensional Adaptation of Diffusion Models: Convergence in Total Variation,”</em> 
+      Conference on Learning Theory (COLT), 2025.
+      <a href="https://arxiv.org/abs/2501.12982" target="_blank">Preprint</a> – 
+      <a href="https://arxiv.org/pdf/2501.12982" target="_blank">PDF</a>
+    </li>
+    <li>
+      Gen Li*, Yuchen Zhou*, Yuting Wei, Yuxin Chen, 
+      <em>“Faster Diffusion Models via Higher-Order Approximation,”</em> 
+      arXiv preprint arXiv:2506.24042, 2025 (*=equal contributions).
+      <a href="https://arxiv.org/abs/2506.24042" target="_blank">Preprint</a> – 
+      <a href="https://arxiv.org/pdf/2506.24042" target="_blank">PDF</a>
+    </li>
+    <li>
+      Zhihan Huang, Yuting Wei, Yuxin Chen, 
+      <em>“Denoising Diffusion Probabilistic Models Are Optimally Adaptive to Unknown Low Dimensionality,”</em> 
+      arXiv preprint arXiv:2408.02320, 2024.
+      <a href="https://arxiv.org/abs/2506.24042" target="_blank">Preprint</a> – 
+      <a href="https://arxiv.org/pdf/2506.24042" target="_blank">PDF</a>
+    </li>
+    <li>
+      Yuchen Wu, Yuxin Chen, Yuting Wei, 
+      <em>“Stochastic Runge-Kutta Methods: Provable Acceleration of Diffusion Models,”</em> 
+      arXiv preprint arXiv:2410.04760, 2024.
+      <a href="https://arxiv.org/abs/2410.04760" target="_blank">Preprint</a> – 
+      <a href="https://arxiv.org/pdf/2410.04760" target="_blank">PDF</a>
+    </li>
+    <li>
+      Gen Li, Yuting Wei, Yuejie Chi, Yuxin Chen, 
+      <em>“A Sharp Convergence Theory for The Probability Flow ODEs of Diffusion Models,”</em> 
+      arXiv preprint arXiv:2408.02320, 2024.
+      <a href="https://arxiv.org/abs/2408.02320" target="_blank">Preprint</a> – 
+      <a href="https://arxiv.org/pdf/2408.02320" target="_blank">PDF</a>
+    </li>
+    <li>
+      Gen Li*, Yu Huang*, Timofey Efimov, Yuting Wei, Yuejie Chi, Yuxin Chen, 
+      <em>“Accelerating Convergence of Score-Based Diffusion Models, Provably,”</em> 
+      International Conference on Machine Learning (ICML), 2024. (*= equal contributions)
+      <a href="https://arxiv.org/abs/2403.03852" target="_blank">Preprint</a> – 
+      <a href="https://yuxinchen2020.github.io/publications/AccDiffusion.pdf" target="_blank">PDF</a> – 
+      <a href="https://github.com/TimofeyEfimov/AcceleratedDiffusionSamplers" target="_blank">Code</a>
+    </li>
+    <li>
+      Gen Li, Yuting Wei, Yuxin Chen, Yuejie Chi, 
+      <em>“Towards Non-Asymptotic Convergence for Diffusion Based Generative Models,”</em> 
+      International Conference on Learning Representations (ICLR), 2024.
+      <a href="https://arxiv.org/abs/2306.09251" target="_blank">Preprint</a> – 
+      <a href="https://yuxinchen2020.github.io/publications/DiffusionSGM.pdf" target="_blank">PDF</a>
+    </li>
+  </ol>
+</section>
+</main>
+
+<script>
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('collapsed');
+  document.querySelector('.main').classList.toggle('collapsed');
+}
+</script>
+</body>
+</html>
